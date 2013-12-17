@@ -7,10 +7,87 @@ const String CANVAS_SELECTOR = "#box_canvas";
 const int NUM_BOXES = 7;
 final Size GUTTER = new Size(4,4);
 
+InputElement numBoxesElt;
+InputElement gutterFractionElt;
+InputElement tlHueElt, tlSatElt, tlLitElt;
+InputElement trHueElt, trSatElt, trLitElt;
+InputElement blHueElt, blSatElt, blLitElt;
+InputElement brHueElt, brSatElt, brLitElt;
+
+ButtonElement goBtn;
+
+int numBoxes = NUM_BOXES;
+Size gutterFraction = GUTTER;
+
+ColorHSL tlColor = new ColorHSL(0, 100, 50);    // red
+ColorHSL trColor = new ColorHSL(300, 100, 20);  // blue
+ColorHSL blColor = new ColorHSL(60, 100, 50);   // yellow
+ColorHSL brColor = new ColorHSL(120, 10, 80);  // green
+
 void main() 
 {
   resizeCanvas();
-  drawBoxes( NUM_BOXES);
+  initElementReferences();
+  initInputElements();
+  drawBoxes( numBoxes);
+  setupEventHandlers();
+}
+
+/**
+ * Initialize variables with references to input elements.
+ */
+initElementReferences() {
+  numBoxesElt = querySelector("#numBoxes");
+  gutterFractionElt = querySelector("#gutterFraction");
+  
+  tlHueElt = querySelector("#tlHue");
+  tlSatElt = querySelector("#tlSat");
+  tlLitElt = querySelector("#tlLit");
+  
+  trHueElt = querySelector("#trHue");
+  trSatElt = querySelector("#trSat");
+  trLitElt = querySelector("#trLit");
+  
+  blHueElt = querySelector("#blHue");
+  blSatElt = querySelector("#blSat");
+  blLitElt = querySelector("#blLit");
+  
+  brHueElt = querySelector("#brHue");
+  brSatElt = querySelector("#brSat");
+  brLitElt = querySelector("#brLit");
+  
+  goBtn = querySelector("#goButton");
+}
+
+/**
+ * Initialize input elements with initial values, so user can edit. 
+ */
+initInputElements() {
+  numBoxesElt.value = NUM_BOXES.toString();
+  gutterFractionElt.value = gutterFraction.width.toString();
+  
+  tlHueElt.value = tlColor.hue.toString();
+  tlSatElt.value = tlColor.saturation.toString();
+  tlLitElt.value = tlColor.lightness.toString();  
+  
+  trHueElt.value = trColor.hue.toString();
+  trSatElt.value = trColor.saturation.toString();
+  trLitElt.value = trColor.lightness.toString();  
+  
+  blHueElt.value = blColor.hue.toString();
+  blSatElt.value = blColor.saturation.toString();
+  blLitElt.value = blColor.lightness.toString();  
+  
+  brHueElt.value = brColor.hue.toString();
+  brSatElt.value = brColor.saturation.toString();
+  brLitElt.value = brColor.lightness.toString();  
+}
+
+/**
+ * Handler on "Go" button, mostly.
+ */
+setupEventHandlers() {
+  goBtn.onClick.listen((e) => go(e));
 }
 
 /**
@@ -20,9 +97,27 @@ resizeCanvas()
 {
   DivElement introDiv = querySelector( INTRO_SELECTOR);
   CanvasElement canvas = querySelector( CANVAS_SELECTOR);
-  canvas.width = window.innerWidth - 40;
-  canvas.height = window.innerHeight - introDiv.clientHeight - 80;
+  int canvasSide = min( window.innerWidth - 40,
+                        window.innerHeight - introDiv.clientHeight - 80);
+  canvas.width = canvasSide;
+  canvas.height = canvasSide;
 }
+
+/**
+ * Run the main code in response to the user hitting the "Go" button.
+ */
+go(MouseEvent e) {
+  numBoxes = int.parse( numBoxesElt.value);
+  gutterFraction = new Size( int.parse(gutterFractionElt.value),int.parse(gutterFractionElt.value));
+  
+  tlColor = new ColorHSL( int.parse(tlHueElt.value), int.parse(tlSatElt.value), int.parse(tlLitElt.value));
+  trColor = new ColorHSL( int.parse(trHueElt.value), int.parse(trSatElt.value), int.parse(trLitElt.value));
+  blColor = new ColorHSL( int.parse(blHueElt.value), int.parse(blSatElt.value), int.parse(blLitElt.value));
+  brColor = new ColorHSL( int.parse(brHueElt.value), int.parse(brSatElt.value), int.parse(brLitElt.value));
+  
+  drawBoxes( numBoxes);
+}
+
 
 /**
  * Draw n x n boxes on the canvas.
@@ -30,6 +125,8 @@ resizeCanvas()
 void drawBoxes( int n)
 {
   CanvasElement canvas = querySelector( CANVAS_SELECTOR);
+  
+  canvas.context2D.clearRect(0, 0, canvas.width, canvas.height);
   
   int squareSize = min( canvas.width ~/ (n), canvas.height ~/ (n));
   
@@ -39,11 +136,6 @@ void drawBoxes( int n)
    * Top/Bottom, Left/Right
    */
    
-  ColorHSL tlColor = new ColorHSL(0, 100, 50);    // red
-  ColorHSL trColor = new ColorHSL(300, 100, 20);  // blue
-  ColorHSL blColor = new ColorHSL(60, 100, 50);   // yellow
-  ColorHSL brColor = new ColorHSL(120, 10, 80);  // green
-  
   for (int i = 0; i < n; i++)
   {
     for (int j = 0; j < n; j++)
@@ -80,7 +172,7 @@ void drawBoxes( int n)
 //      }
       fillColor = boxFillColor( horizontalFraction, verticalFraction,
           tlColor, trColor, blColor, brColor);
-      drawBoxAt( i, j, boxCellSize, GUTTER, fillColor);
+      drawBoxAt( i, j, boxCellSize, gutterFraction, fillColor);
     }
   }
     

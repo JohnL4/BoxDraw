@@ -12,7 +12,50 @@
     </div>
     
     <div class="canvas_container">
-      <canvas id="box_canvas"></canvas>
+      <table class="interesting">
+        <tr>
+          <td>
+            <canvas id="box_canvas"></canvas>
+          </td>
+          <td>
+            <div id="controlsDiv">
+              <div>
+                <label for="numBoxes">Num. boxes:</label>
+                <input id="numBoxes" type="text" size="2"/>
+              </div>
+              <div>
+                <label for="gutterFraction">Gutter fraction:</label>
+                <input id="gutterFraction" type="text" size="2"/>
+              </div>
+              <div class="tl">
+                <label for="tlColor">Top Left Color (HSL):</label>
+                <input id="tlHue" size="2"/>
+                <input id="tlSat" size="2"/>
+                <input id="tlLit" size="2"/>
+              </div>
+              <div class="tr">
+                <label for="trColor">Top Right Color (HSL):</label>
+                <input id="trHue" size="2"/>
+                <input id="trSat" size="2"/>
+                <input id="trLit" size="2"/>
+              </div>
+              <div class="bl">
+                <label for="blColor">Bottom Left Color (HSL):</label>
+                <input id="blHue" size="2"/>
+                <input id="blSat" size="2"/>
+                <input id="blLit" size="2"/>
+              </div>
+              <div class="br">
+                <label for="brColor">Bottom Right Color (HSL):</label>
+                <input id="brHue" size="2"/>
+                <input id="brSat" size="2"/>
+                <input id="brLit" size="2"/>
+              </div>
+              <button id="goButton" type="button">Go</button>
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
 
     <script type="application/dart" src="boxdraw.dart"></script>

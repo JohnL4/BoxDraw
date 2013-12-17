@@ -18,7 +18,12 @@ h1, p {
   background-color: #fff;
 }
 
-#box_canvas {
+table.interesting {
+  margin-left:0;
+  margin-right:0;
+  width: 100%;
+}
+.interesting {
   background-color: #eee;
 }
 
