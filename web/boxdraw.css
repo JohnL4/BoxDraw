@@ -18,6 +18,15 @@ h1, p {
   background-color: #fff;
 }
 
+#controlsDiv {
+  /* border: 1px solid #ccc; */
+  padding: 0.125in;
+}
+
+#instructions {
+  padding: 0.125in;
+}
+
 table.interesting {
   margin-left:0;
   margin-right:0;

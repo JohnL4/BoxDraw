@@ -17,7 +17,7 @@
           <td>
             <canvas id="box_canvas"></canvas>
           </td>
-          <td>
+          <td valign="top">
             <div id="controlsDiv">
               <div>
                 <label for="numBoxes">Num. boxes:</label>
@@ -52,6 +52,27 @@
                 <input id="brLit" size="2"/>
               </div>
               <button id="goButton" type="button">Go</button>
+            </div>
+            <hr/>
+            <div id="instructions">
+            <p><b>A quick note on HSL (hue, saturation, lightness) colors:</b></p>
+            <p><b>Hue</b> is measured on a circle (0-360 degrees) that looks like this:</p>
+              <table style="margin-left: 10%; margin-right: auto;">
+                <tr><td>0</td><td>red</td></tr>
+                <tr><td>60</td><td>yellow</td></tr>
+                <tr><td>120</td><td>green</td></tr>
+                <tr><td>180</td><td>cyan</td></tr>
+                <tr><td>240</td><td>blue</td></tr>
+                <tr><td>300</td><td>magenta</td></tr>
+              </table>
+              <p><b>Saturation</b> is measured on a scale from 0-100, where 0 is completely unsaturated 
+              (i.e. <em>gray</em>) and 100 is completely saturated (i.e., the richest, least gray, 
+              possible color).</p>
+              <p><b>Lightness</b> is measured on a scale from 0-100, where 0 is black, 100 is white, 50
+              is right in between.  If you have a saturated color (say, <em>red</em>), then "lighter"
+              means "more pink", and "darker" means "more maroon".  (Try it!)</p>
+              <p>Your standard, fully-saturated colors will have a <em>saturation</em> value of 100,
+              and a <em>lightness</em> value of 50.
             </div>
           </td>
         </tr>
