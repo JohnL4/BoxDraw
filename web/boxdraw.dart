@@ -14,7 +14,8 @@ InputElement trHueElt, trSatElt, trLitElt;
 InputElement blHueElt, blSatElt, blLitElt;
 InputElement brHueElt, brSatElt, brLitElt;
 
-ButtonElement goBtn;
+FormElement formElt;
+InputElement goBtn;
 
 int numBoxes = NUM_BOXES;
 Size gutterFraction = GUTTER;
@@ -56,6 +57,7 @@ initElementReferences() {
   brSatElt = querySelector("#brSat");
   brLitElt = querySelector("#brLit");
   
+  formElt = querySelector("#controlsForm");
   goBtn = querySelector("#goButton");
 }
 
@@ -87,6 +89,7 @@ initInputElements() {
  * Handler on "Go" button, mostly.
  */
 setupEventHandlers() {
+  formElt.onSubmit.listen((e) => go(e));
   goBtn.onClick.listen((e) => go(e));
 }
 
@@ -106,7 +109,7 @@ resizeCanvas()
 /**
  * Run the main code in response to the user hitting the "Go" button.
  */
-go(MouseEvent e) {
+go(Event e) {
   numBoxes = int.parse( numBoxesElt.value);
   gutterFraction = new Size( int.parse(gutterFractionElt.value),int.parse(gutterFractionElt.value));
   
@@ -116,6 +119,7 @@ go(MouseEvent e) {
   brColor = new ColorHSL( int.parse(brHueElt.value), int.parse(brSatElt.value), int.parse(brLitElt.value));
   
   drawBoxes( numBoxes);
+  e.preventDefault();
 }
 
 
