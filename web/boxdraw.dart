@@ -90,7 +90,7 @@ initInputElements() {
  */
 setupEventHandlers() {
   formElt.onSubmit.listen((e) => go(e));
-  goBtn.onClick.listen((e) => go(e));
+//  goBtn.onClick.listen((e) => go(e));
 }
 
 /**
